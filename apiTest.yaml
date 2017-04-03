@@ -61,18 +61,6 @@
 
 
 
--  test:
-    - name: "update features"
-    - group: "updateBook"
-    - url: "/test/book/updateBook"
-    - method: "POST"
-    - body: "bookValues={\"id\": \"1\", \"name\": \"safda\", \"author\": \"asdfa\", \"year\": \"1999\", \"digest\": \"fasfasf\"}"
-    - validators:
-        - compare: {jsonpath_mini: "errorNo",   comparator: "eq",   expected: '0'}
-        - compare: {jsonpath_mini: "success",    comparator: "eq",   expected: True}
-        - compare: {jsonpath_mini: "errorInfo",  comparator: "eq",   expected: '更新成功'}
-
-
 
 -  test:
     - name: "update inexistent book"
