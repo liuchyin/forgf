@@ -74,7 +74,7 @@ pyresttest封装了网络请求，结果解析等底层操作，只需按照格�
 	    	- method: "POST"		#请求方法
 	    	- validators:		#返回值校验脚本
 	    		#检验书本数量大于0
-	        	- compare: {jsonpath_mini: "totalProperty",     comparator: "gt",    expected: 0}	
+			- compare: {jsonpath_mini: "totalProperty",     comparator: "gt",    expected: 0}	
 	        	#检验书本数量和书本数组长度一致
 	        	- compare: {jsonpath_mini: "root",     comparator: "count_eq",    expected: {jsonpath_mini: "totalProperty"}}
 	        	#检验year字段是否存在
