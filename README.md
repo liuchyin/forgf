@@ -74,23 +74,23 @@ pyresttest封装了网络请求，结果解析等底层操作，只需按照格�
 	    	- method: "POST"		#请求方法
 	    	- validators:		#返回值校验脚本
 	    		#检验书本数量大于0
-			- compare: {jsonpath_mini: "totalProperty",     comparator: "gt",    expected: 0}	
-	        	#检验书本数量和书本数组长度一致
-	        	- compare: {jsonpath_mini: "root",     comparator: "count_eq",    expected: {jsonpath_mini: "totalProperty"}}
-	        	#检验year字段是否存在
+	    		- compare: {jsonpath_mini: "totalProperty",     comparator: "gt",    expected: 0}	
+	    		#检验书本数量和书本数组长度一致
+	    		- compare: {jsonpath_mini: "root",     comparator: "count_eq",    expected: {jsonpath_mini: "totalProperty"}}
+	    		#检验year字段是否存在
 	        	- extract_test: {jsonpath_mini: "root.0.year",     test: 'exists'}
-	        	#检验year字段类型为int
-	        	- compare: {jsonpath_mini: "root.0.year",     comparator: "type",    expected: "int"}
-	        	- extract_test: {jsonpath_mini: "root.0.id",     test: 'exists'}
-	        	- compare: {jsonpath_mini: "root.0.id",     comparator: "type",    expected: "int"}
-	        	- extract_test: {jsonpath_mini: "root.0.name",     test: 'exists'}
-	        	- compare: {jsonpath_mini: "root.0.name",    comparator: "type",    expected: "string"}
-	        	- extract_test: {jsonpath_mini: "root.0.author",     test: 'exists'}
-	        	- compare: {jsonpath_mini: "root.0.author",    comparator: "type",    expected: "string"}
-	        	- extract_test: {jsonpath_mini: "root.0.digest",     test: 'exists'}
-	        	- compare: {jsonpath_mini: "root.0.digest",    comparator: "type",    expected: "string"}
-	        	#检验所有的id都大于0
-	        	- compare: {jmespath: "min_by(root, &id).id",     comparator: 'gt', expected: 0}
+	    		#检验year字段类型为int
+	    		- compare: {jsonpath_mini: "root.0.year",     comparator: "type",    expected: "int"}
+	    		- extract_test: {jsonpath_mini: "root.0.id",     test: 'exists'}
+	    		- compare: {jsonpath_mini: "root.0.id",     comparator: "type",    expected: "int"}
+	    		- extract_test: {jsonpath_mini: "root.0.name",     test: 'exists'}
+	    		- compare: {jsonpath_mini: "root.0.name",    comparator: "type",    expected: "string"}
+	    		- extract_test: {jsonpath_mini: "root.0.author",     test: 'exists'}
+	    		- compare: {jsonpath_mini: "root.0.author",    comparator: "type",    expected: "string"}
+	    		- extract_test: {jsonpath_mini: "root.0.digest",     test: 'exists'}
+	    		- compare: {jsonpath_mini: "root.0.digest",    comparator: "type",    expected: "string"}
+	    		#检验所有的id都大于0
+	    		- compare: {jmespath: "min_by(root, &id).id",     comparator: 'gt', expected: 0}
 4. 测试case  
 时间关系，编写了如下测试case
 	1. 获取书本列表
