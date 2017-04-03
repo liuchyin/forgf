@@ -1,7 +1,7 @@
 #UI自动化测试脚本
 
 1. 解决方案  
-我采用了selenium+phantomjs来实现UI自动化测试。selenium是流行的web UI自动化测试框架，不再赘述。选择phantomjs是因为它是脱离实际浏览器的UI测试引擎，可以部署在服务端。
+我采用了selenium+phantomjs来实现UI自动化测试。selenium是流行的web UI自动化测试框架，不再赘述。选择phantomjs是因为它是没有界面的浏览器，可以部署在服务端。
 2. 编写脚本  
 selenium编写自动化脚本的思路主要是通过id、xpath定位页面上的元素，再模拟点击、输入等操作，最后通过UI元素判断执行结果是否符合预期。  
 以addBook功能的测试脚本为例，详细介绍一个脚本的编写思路。
