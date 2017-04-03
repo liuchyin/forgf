@@ -1,0 +1,113 @@
+---
+- config:
+    - testset: "Quickstart app tests"
+
+- test:
+    - group: "getBookList"
+    - name: "getBookList"
+    - url: "/test/book/getBookList"
+    - method: "POST"
+    - validators:
+        - compare: {jsonpath_mini: "totalProperty",     comparator: "gt",    expected: 0}
+        - compare: {jsonpath_mini: "root",     comparator: "count_eq",    expected: {jsonpath_mini: "totalProperty"}}
+        - extract_test: {jsonpath_mini: "root.0.year",     test: 'exists'}
+#        - compare: {jmespath: "root[*].year",    comparator: "type",     expected: "int"}
+        - compare: {jsonpath_mini: "root.0.year",     comparator: "type",    expected: "int"}
+        - extract_test: {jsonpath_mini: "root.0.id",     test: 'exists'}
+        - compare: {jsonpath_mini: "root.0.id",     comparator: "type",    expected: "int"}
+        - extract_test: {jsonpath_mini: "root.0.name",     test: 'exists'}
+        - compare: {jsonpath_mini: "root.0.name",    comparator: "type",    expected: "string"}
+        - extract_test: {jsonpath_mini: "root.0.author",     test: 'exists'}
+        - compare: {jsonpath_mini: "root.0.author",    comparator: "type",    expected: "string"}
+        - extract_test: {jsonpath_mini: "root.0.digest",     test: 'exists'}
+        - compare: {jsonpath_mini: "root.0.digest",    comparator: "type",    expected: "string"}
+        - compare: {jmespath: "min_by(root, &id).id",     comparator: 'gt', expected: 0}
+#        - extract_test: {jsonpath_mini: "root",     test: 'not_exists'}
+
+- test:
+    - name: "addNewBook"
+    - group: "addBook"
+    - url: "/test/book/addBook"
+    - method: "POST"
+    - body: "bookValues={\"id\": \"7\", \"name\": \"safda\", \"author\": \"asdfa\", \"year\": \"1999\", \"digest\": \"fasfasf\"}"
+    - validators:
+        - compare: {jsonpath_mini: "errorNo",   comparator: "eq",   expected: '0'}
+        - compare: {jsonpath_mini: "success",    comparator: "eq",   expected: True}
+        - compare: {jsonpath_mini: "errorInfo",  comparator: "eq",   expected: ''}
+
+
+-  test:
+    - name: "addExistedBook"
+    - group: "addBook"
+    - url: "/test/book/addBook"
+    - method: "POST"
+    - body: "bookValues={\"id\": \"1\", \"name\": \"safda\", \"author\": \"asdfa\", \"year\": \"1999\", \"digest\": \"fasfasf\"}"
+    - validators:
+        - compare: {jsonpath_mini: "errorNo",   comparator: "eq",   expected: '1'}
+        - compare: {jsonpath_mini: "success",    comparator: "eq",   expected: False}
+        - compare: {jsonpath_mini: "errorInfo",  comparator: "eq",   expected: '该id已存在。'}
+
+
+-  test:
+    - name: "update features"
+    - group: "updateBook"
+    - url: "/test/book/updateBook"
+    - method: "POST"
+    - body: "bookValues={\"id\": \"1\", \"name\": \"safda\", \"author\": \"asdfa\", \"year\": \"1999\", \"digest\": \"fasfasf\"}"
+    - validators:
+        - compare: {jsonpath_mini: "errorNo",   comparator: "eq",   expected: '0'}
+        - compare: {jsonpath_mini: "success",    comparator: "eq",   expected: True}
+        - compare: {jsonpath_mini: "errorInfo",  comparator: "eq",   expected: '更新成功'}
+
+
+
+-  test:
+    - name: "update features"
+    - group: "updateBook"
+    - url: "/test/book/updateBook"
+    - method: "POST"
+    - body: "bookValues={\"id\": \"1\", \"name\": \"safda\", \"author\": \"asdfa\", \"year\": \"1999\", \"digest\": \"fasfasf\"}"
+    - validators:
+        - compare: {jsonpath_mini: "errorNo",   comparator: "eq",   expected: '0'}
+        - compare: {jsonpath_mini: "success",    comparator: "eq",   expected: True}
+        - compare: {jsonpath_mini: "errorInfo",  comparator: "eq",   expected: '更新成功'}
+
+
+
+-  test:
+    - name: "update inexistent book"
+    - group: "updateBook"
+    - url: "/test/book/updateBook"
+    - method: "POST"
+    - body: "bookValues={\"id\": \"10\", \"name\": \"safda\", \"author\": \"asdfa\", \"year\": \"1999\", \"digest\": \"fasfasf\"}"
+    - validators:
+        - compare: {jsonpath_mini: "errorNo",   comparator: "eq",   expected: '1'}
+        - compare: {jsonpath_mini: "success",    comparator: "eq",   expected: False}
+        - compare: {jsonpath_mini: "errorInfo",  comparator: "eq",   expected: '该id不存在。'}
+
+
+-  test:
+    - name: "delete book"
+    - group: "deleteBook"
+    - url: "/test/book/deleteBook"
+    - method: "POST"
+    - body: "idString={\"id\":\"3\"}"
+    - validators:
+        - compare: {jsonpath_mini: "errorNo",   comparator: "eq",   expected: '0'}
+        - compare: {jsonpath_mini: "success",    comparator: "eq",   expected: True}
+        - compare: {jsonpath_mini: "errorInfo",  comparator: "eq",   expected: '删除成功'}
+
+
+-  test:
+    - name: "delete inexistent book"
+    - group: "deleteBook"
+    - url: "/test/book/deleteBook"
+    - method: "POST"
+    - body: "idString={\"id\":\"3\"}"
+    - validators:
+        - compare: {jsonpath_mini: "errorNo",   comparator: "eq",   expected: '1'}
+        - compare: {jsonpath_mini: "success",    comparator: "eq",   expected: False}
+        - compare: {jsonpath_mini: "errorInfo",  comparator: "eq",   expected: '该id不存在。'}
+
+
+
