@@ -8,7 +8,7 @@ selenium编写自动化脚本的思路主要是通过id、xpath定位页面上�
 		
 		#启动		
 		driver = webdriver.PhantomJS('/usr/local/bin/phantomjs')
-		#设置渲染窗口分辨率。默认的窗口太小会导致一些界面不在窗口内而定位不到		
+		#设置渲染窗口分辨率。默认的窗口太小会导致一些元素不在窗口内而定位不到		
 		driver.set_window_size(1366, 768) 
 		#连接服务器		
 		self.driver.get('http://127.0.0.1:8080/')
