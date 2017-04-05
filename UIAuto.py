@@ -87,7 +87,7 @@ class gfTest(unittest.TestCase):
 				assert "errorNo:1,errorInfo:该id已存在。" == message.text
 
 
-		def atest_deleteBook(self):
+		def test_deleteBook(self):
 				'''删除id为5的书'''
 				driver = self.driver
 
@@ -105,7 +105,7 @@ class gfTest(unittest.TestCase):
 				message = driver.find_element_by_id("messagebox-1001-displayfield-inputEl")
 				assert "删除书籍成功！" == message.text
 
-		def atest_modifyAuthor(self):
+		def test_modifyAuthor(self):
 				'''修改id=3的书的作者'''
 				driver = self.driver
 				driver.find_element_by_id("treeview-1015-record-book_manage").click()
@@ -133,7 +133,7 @@ class gfTest(unittest.TestCase):
 				message = driver.find_element_by_id("messagebox-1001-displayfield-inputEl")
 				assert  message.text == "更新成功"
 
-		def atest_modifyNewID(self):
+		def test_modifyNewID(self):
 				'''将书的ID修改为新的ID12'''
 				driver = self.driver
 				driver.find_element_by_id("treeview-1015-record-book_manage").click()
@@ -158,7 +158,7 @@ class gfTest(unittest.TestCase):
 				message = driver.find_element_by_id("messagebox-1001-displayfield-inputEl")
 				assert  message.text == "errorNo:1,errorInfo:该id不存在。"
 
-		def atest_modifyExistedID(self):
+		def test_modifyExistedID(self):
 				'''将书的ID修改为已存在的ID1'''
 				driver = self.driver
 				driver.find_element_by_id("treeview-1015-record-book_manage").click()
